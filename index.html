@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>垢抜けTodoアプリ</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+    <h1>💎 垢抜けTodo</h1>
+</header>
+
+<main>
+  <button id="theme-toggle" class="icon-button" aria-label="テーマ切り替え">
+    <img src="sun.png" alt="ライトモード" class="light-icon">
+    <img src="moon.png" alt="ダークモード" class="dark-icon">
+</button>
+
+
+    <!-- 最終ゴール -->
+    <section id="goal-section" class="card">
+        <h2>✨ 最終ゴール</h2>
+        <div class="goal-display">
+            <p id="current-goal">まだゴールが設定されていません。</p>
+            <button id="set-goal-btn" class="icon-button">✏️</button>
+        </div>
+        <div id="goal-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">×</span>
+                <h3>最終ゴールを設定</h3>
+                <input type="text" id="goal-input" placeholder="例: ○月までに肌荒れゼロ！" maxlength="50">
+                <input type="date" id="goal-deadline-input">
+                <button id="save-goal-btn">保存</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="level-section" class="card">
+    <h2>🌟 垢抜けレベル</h2>
+    <div class="level-bar" id="overall-level">
+        <span>垢抜け度</span>
+        <div class="bar-container"><div class="bar-fill"></div></div>
+        <span class="level-text">Lv 1</span>
+    </div>
+    </section>
+
+    
+    <!-- Todo追加 -->
+    <section id="add-todo-section" class="card">
+        <h2>➕ 新しいTodo</h2>
+        <form id="todo-form">
+            <input type="text" id="todo-name-input" placeholder="例: 朝の洗顔" required maxlength="80">
+            <div class="tag-checkboxes">
+                <label><input type="checkbox" name="todoTag" value="スキンケア" class="tag-checkbox">スキンケア</label>
+                <label><input type="checkbox" name="todoTag" value="フィットネス" class="tag-checkbox">フィットネス</label>
+                <label><input type="checkbox" name="todoTag" value="ファッション" class="tag-checkbox">ファッション</label>
+                <label><input type="checkbox" name="todoTag" value="食事" class="tag-checkbox">食事</label>
+            </div>
+
+            <button type="submit" class="button primary">追加</button>
+        </form>
+    </section>
+
+    <!-- Todoリスト -->
+    <section id="todo-list-section" class="card">
+        <h2>📝 Todoリスト</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">すべて</button>
+            <button class="filter-btn" data-filter="未完了">未完了</button>
+            <button class="filter-btn" data-filter="完了">完了</button>
+            <button class="filter-btn" data-filter="スキンケア">スキンケア</button>
+            <button class="filter-btn" data-filter="フィットネス">フィットネス</button>
+            <button class="filter-btn" data-filter="ファッション">ファッション</button>
+            <button class="filter-btn" data-filter="食事">食事</button>
+        </div>
+        <ul id="todo-list"></ul>
+        <div id="empty-state" class="empty-state">Todoがありません。</div>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

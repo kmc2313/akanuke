@@ -1,0 +1,876 @@
+/* ベーススタイル */
+:root {
+    /* 可愛らしいパステルカラーの新配色 */
+    --primary-color: #FFB6C1;   /* ライトピンク (メインの強調色: ヘッダータイトル、アクティブなボタンなど) */
+    --secondary-color: #DDA0DD; /* ラベンダー (サブの強調色: ボーダー、アイコン、一部テキストなど) */
+    --accent-color: #FFDAB9;    /* ピーチ (背景のアクセント、フィルターボタンのホバーなど) */
+    --text-color: #555555;      /* 柔らかいグレーのテキスト */
+    --background-color: #FFF0F5; /* ラベンダーブラッシュ (ごく薄いピンクの背景) */
+    --card-background: #FFFFFF; /* カードの背景は清潔感のある白 */
+    --border-color: #F0E6F0;    /* ごく薄いラベンダー系のボーダー */
+    --shadow-color: rgba(255, 182, 193, 0.25); /* primary-colorの柔らかな影 */
+    --completed-bg: #E6FFE6;    /* 完了時の背景 (薄いミントグリーンはそのまま) */
+    --completed-text: #5cb85c;  /* 完了時のテキスト色 (視認性のため維持) */
+    --danger-color: #FF69B4;    /* ホットピンク (削除などの警告色) */
+    --warning-color: #FFD700;   /* ゴールド (注意: 視認性のため少し鮮やかさを残す) */
+    --info-color: #ADD8E6;      /* ライトブルー (情報: 柔らかい水色) */
+
+    --tag-bg: #E0BBE4;          /* ラベンダー系のタグ背景 */
+    --tag-text: #6A0572;        /* 濃いめのパープルタグテキスト (視認性のためコントラストを確保) */
+
+    /* ダークモードの色もパステル調の雰囲気を残しつつ調整 */
+    --dark-text-color: #E0E0E0;      /* 明るめのグレーで柔らかく */
+    --dark-background-color: #4A4E69; /* ダークグレープ (深みのある落ち着いた紫がかったグレー) */
+    --dark-accect-color: #cb9ca9; /* ダークラベンダー (アクセントカラー - 落ち着いた紫系) */
+    --dark-card-background: #a2a2ab; /* アメジストグレー (背景より少し明るい、こちらも落ち着いた紫系) */
+    --dark-border-color: #8C8C9A;     /* やや明るめのグレープ系で柔らかいボーダーに */
+    --dark-shadow-color: rgba(0, 0, 0, 0.5); /* 影は背景に合わせて調整 */
+    --dark-completed-bg: #3b4548;    /* ミューテッドスチールブルー (完了時の背景 - ライトモードの緑と異なる) */
+    --dark-completed-text: #C0D9E5;  /* ライトブルーグレー (完了時のテキスト - ライトモードの緑と異なる) */
+    --dark-todo-color:#c8c8c0; /* ダークモードのTodoリストのテキスト色 (ライトモードのグレーより明るめ) */
+    --dark-tag-bg: #5F9EA0;          /* カデットブルー (タグ背景 - ライトモードのラベンダーと異なる) */
+    --dark-tag-text: #ADD8E6;        /* ライトブルー (タグテキスト - ライトモードのパープルと異なる) */
+
+    /* その他のダークモード関連色（必要であれば調整） */
+    --dark-danger-color: #E67E22; /* オレンジ系 (ライトモードのホットピンクと異なる) */
+    --dark-warning-color: #F1C40F; /* ゴールド系 (ライトモードと異なるが視認性維持) */
+    --dark-info-color: #3498DB;    /* 青系 (ライトモードのライトブルーより濃く) */
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ダークモードスタイル */
+body.dark-mode {
+    background-color: var(--dark-background-color);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode section.card {
+    background-color: var(--dark-card-background);
+    box-shadow: 0 4px 15px var(--dark-shadow-color);
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: var(--dark-todo-color);
+    color: var(--dark-text-color);
+    border-color: var(--dark-card-background);
+}
+
+body.dark-mode .tag-checkboxes label {
+    background-color: var(--dark-accect-color);
+    border-color: var(--dark-card-background);
+}
+
+body.dark-mode .tag-checkboxes input[type="checkbox"]:checked + span {
+    background-color: var(--dark-tag-bg);
+    color: var(--dark-tag-text);
+}
+
+body.dark-mode .todo-tags span {
+    background-color: var(--dark-todo-color);
+    color: var(--dark-tag-text);
+}
+
+body.dark-mode #todo-list li {
+    background-color: var(--dark-todo-color);
+    border-color: var(--dark-border-color);
+}
+
+body.dark-mode #todo-list li.completed {
+    background-color: var(--dark-completed-bg);
+    color: var(--dark-completed-text);
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--dark-card-background);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .modal-content .close-button {
+    color: var(--dark-text-color);
+}
+
+
+/* ヘッダー */
+header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    font-size: 2.2em;
+    color: var(--primary-color); /* メインカラーを適用 */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* アイコンボタン */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--text-color); /* デフォルトのテキスト色 */
+    transition: color 0.3s;
+}
+
+body.dark-mode .icon-button .material-symbols-outlined {
+    color: var(--dark-text-color);
+}
+
+.icon-button:hover {
+    background-color: rgba(255, 182, 193, 0.15); /* primary-colorの半透明ホバー */
+}
+
+body.dark-mode .icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* アイコンボタン内の画像（新しいアイコン）のスタイル */
+.icon-button img {
+    width: 24px;   /* 画像の元のサイズに合わせる */
+    height: 24px;  /* 画像の元のサイズに合わせる */
+    vertical-align: middle; /* 必要であれば画像の垂直方向の配置を調整 */
+    transition: opacity 0.3s; /* フェードイン/アウト効果を追加 */
+}
+
+#theme-toggle .light-icon { display: block; }
+#theme-toggle .dark-icon { display: none; }
+
+body.dark-mode #theme-toggle .light-icon { display: none; }
+body.dark-mode #theme-toggle .dark-icon { display: block; }
+
+
+/* メインコンテンツエリア */
+main {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* カードスタイル */
+.card {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: 12px;
+    /* 影の色もパステルに合わせて変更 */
+    box-shadow: 0 6px 20px var(--shadow-color);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: var(--primary-color); /* メインカラーを適用 */
+    margin-top: 0;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 最終ゴールセクション */
+#goal-section .goal-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: var(--accent-color); /* アクセントカラーを適用 */
+    border-radius: 8px;
+    margin-top: 20px;
+    color: var(--text-color); /* テキスト色をメインに合わせる */
+    font-weight: bold;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+body.dark-mode #goal-section .goal-display {
+    background-color: var(--dark-accect-color); /* ダークモードでのアクセントカラー */
+    color: var(--dark-text-color);
+}
+
+#goal-section .goal-display p {
+    margin: 0;
+    flex-grow: 1;
+    font-size: 1.1em;
+}
+
+#set-goal-btn {
+    margin-left: 15px;
+    background-color: transparent;
+}
+#set-goal-btn .material-symbols-outlined {
+    color: var(--primary-color); /* メインカラーを適用 */
+}
+body.dark-mode #set-goal-btn .material-symbols-outlined {
+    color: var(--dark-text-color);
+}
+#set-goal-btn:hover {
+    background-color: rgba(255, 182, 193, 0.1); /* primary-colorの半透明ホバー */
+}
+body.dark-mode #set-goal-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+
+/* フォーム共通スタイル */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-group .required {
+    color: var(--danger-color); /* 危険色もパステルに合わせたホットピンクに */
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+.form-group .optional {
+    color: #888; /* 少し明るいグレー */
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"], /* 日付入力にも適用 */
+textarea,
+select {
+    width: calc(100% - 24px); /* Padding分を引く */
+    padding: 12px;
+    border: 1px solid var(--border-color); /* パステル系のボーダー */
+    border-radius: 8px;
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--card-background);
+    color: var(--text-color);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--secondary-color); /* フォーカス時のボーダー色をパステルに */
+    box-shadow: 0 0 0 3px rgba(221, 160, 221, 0.3); /* secondary-colorの半透明影 */
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.empty-state {
+    display: none;
+    text-align: center;
+    color: var(--text-color);
+    font-style: italic;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--accent-color); /* 控えめな背景 */
+    opacity: 0.8;
+}
+.empty-state.active {
+    display: block;
+}
+
+.level-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.bar-container {
+    flex: 1;
+    height: 20px;
+    background: #F0F0F0; /* バーの背景も柔らかい色に */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); /* 影も少し控えめに */
+}
+
+.bar-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.8s ease;
+    /* 詰まり具合を表すグラデーションもパステルに */
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    border-radius: 10px;
+}
+
+.level-text {
+    min-width: 50px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* ボタンのスタイルをパステルカラーに調整 */
+.button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.button.primary {
+    background-color: var(--primary-color);
+    color: white; /* 白いテキストでコントラストを出す */
+    box-shadow: 0 4px 8px var(--shadow-color); /* メインカラーの影 */
+}
+
+.button.primary:hover {
+    background-color: #FF8BA0; /* 少し濃いピンクに */
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.button.secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    box-shadow: 0 4px 8px rgba(221, 160, 221, 0.3); /* secondary-colorの影 */
+}
+
+.button.secondary:hover {
+    background-color: #C080C0; /* 少し濃いラベンダーに */
+    box-shadow: 0 6px 12px rgba(221, 160, 221, 0.4);
+}
+
+.button.outline {
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    box-shadow: none;
+}
+
+.button.outline:hover {
+    background-color: rgba(221, 160, 221, 0.1);
+    color: #C080C0;
+    border-color: #C080C0;
+}
+
+.button.danger {
+    background-color: var(--danger-color); /* ホットピンク */
+    color: white;
+}
+
+.button.danger:hover {
+    background-color: #E63946; /* 少し濃い赤 */
+}
+
+/* タグチェックボックスのスタイル */
+.tag-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px; /* 下に余白を追加 */
+}
+
+.tag-checkboxes label {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--background-color); /* カード背景に合わせて変更 */
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* 影を控えめに */
+}
+
+.tag-checkboxes input[type="checkbox"] {
+    display: none; /* 元のチェックボックスを非表示に */
+}
+
+.tag-checkboxes input[type="checkbox"] + span {
+    color: var(--text-color);
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.tag-checkboxes input[type="checkbox"]:checked + span {
+    background-color: var(--tag-bg); /* タグ背景色 */
+    color: var(--tag-text); /* タグテキスト色 */
+    border-radius: 15px; /* 角丸を適用 */
+    padding: 2px 8px; /* パディングを調整 */
+    margin: -2px -8px; /* パディングで広がる分を相殺 */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tag-checkboxes input[type="checkbox"]:checked + span::before {
+    content: '✓ '; /* チェックマークを追加 */
+}
+
+/* 付随情報エリア */
+.additional-info-area .info-group {
+    display: none; /* 初期状態では非表示 */
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px dashed var(--border-color); /* 点線ボーダーで区切り */
+    animation: fadeIn 0.5s ease-out; /* フェードインアニメーション */
+}
+
+.additional-info-area .info-group.active {
+    display: block; /* アクティブな場合は表示 */
+}
+
+.additional-info-area h3 {
+    font-size: 1.3em;
+    color: var(--secondary-color); /* セカンダリカラー */
+    margin-bottom: 15px;
+}
+
+/* アニメーションキーフレーム */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Todoリスト */
+#todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-background);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow-color); /* 影も調整 */
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border-left: 8px solid var(--secondary-color); /* 左にアクセントボーダー */
+}
+
+#todo-list li.completed {
+    background-color: var(--completed-bg);
+    color: var(--completed-text);
+    border-left-color: var(--completed-text);
+    opacity: 0.8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+#todo-list li .todo-checkbox {
+    margin-right: 15px;
+    min-width: 20px;
+    min-height: 20px;
+    accent-color: var(--primary-color); /* チェックボックスの色 */
+}
+
+#todo-list li .todo-content {
+    flex-grow: 1;
+}
+
+#todo-list li .todo-name {
+    font-weight: bold;
+    font-size: 1.15em;
+    color: var(--text-color); /* 常にテキスト色 */
+}
+
+#todo-list li.completed .todo-name {
+    color: var(--completed-text);
+    text-decoration: line-through;
+}
+
+
+#todo-list li .todo-tags {
+    margin-top: 5px;
+}
+
+#todo-list li .todo-tags span {
+    display: inline-block;
+    background-color: var(--tag-bg); /* タグ背景色 */
+    color: var(--tag-text); /* タグテキスト色 */
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-right: 8px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+#todo-list li .todo-notes {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-color); /* 点線区切り */
+}
+#todo-list li.completed .todo-notes {
+    color: var(--completed-text);
+    border-top-color: var(--completed-text);
+}
+
+
+#todo-list li .delete-btn {
+    margin-left: 20px;
+    color: var(--danger-color); /* ホットピンク */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+#todo-list li .delete-btn:hover {
+    background-color: rgba(255, 105, 180, 0.1); /* ホットピンクの半透明ホバー */
+}
+
+/* フィルターボタン */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.filter-btn:hover {
+    background-color: var(--accent-color); /* ホバーでアクセントカラー */
+    color: var(--text-color);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color); /* アクティブでメインカラー */
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+/* モーダル共通スタイル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px); /* 背景をぼかす */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px var(--shadow-color); /* 影も調整 */
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: slideIn 0.3s ease-out; /* スライドインアニメーション */
+}
+
+.modal-content h3, .modal-content h4 {
+    color: var(--primary-color); /* プライマリーカラー */
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    text-align: center;
+}
+.modal-content h4 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+
+.modal-content .close-button {
+    color: var(--text-color);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+    color: var(--danger-color); /* ホットピンク */
+    text-decoration: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* アニメーションキーフレーム (モーダル) */
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Todo詳細表示用 */
+.detail-display {
+    padding: 15px 0;
+}
+
+.detail-display p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+.detail-display p strong {
+    color: var(--secondary-color); /* 項目名をセカンダリカラーに */
+}
+
+#detail-todo-title {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#detail-tags-display span {
+    display: inline-block;
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+#detail-created-at {
+    font-size: 0.9em;
+    color: #999;
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Todo編集フォーム固有のスタイル調整 */
+#edit-todo-form {
+    display: none; /* 初期状態では非表示 */
+}
+
+/* トースト通知 */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: toastFadeIn 0.3s forwards, toastFadeOut 0.5s 2.5s forwards; /* 2.5秒後にフェードアウト開始 */
+    min-width: 250px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.toast.success {
+    background-color: #d4edda; /* 薄い緑 */
+    color: #155724; /* 濃い緑 */
+    border-left: 5px solid #28a745;
+}
+.toast.info {
+    background-color: #d1ecf1; /* 薄い水色 */
+    color: #0c5460; /* 濃い水色 */
+    border-left: 5px solid #17a2b8;
+}
+.toast.warning {
+    background-color: #ffeeba; /* 薄い黄色 */
+    color: #856404; /* 濃い黄色 */
+    border-left: 5px solid #ffc107;
+}
+.toast.error {
+    background-color: #f8d7da; /* 薄い赤 */
+    color: #721c24; /* 濃い赤 */
+    border-left: 5px solid #dc3545;
+}
+
+@keyframes toastFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) translateX(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
+}
+
+@keyframes toastFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px) translateX(-50%);
+    }
+}
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .button {
+        width: 100%;
+        margin-bottom: 10px; /* 小画面でのボタン間のスペース */
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .modal-content h3, .modal-content h4 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    #todo-list li {
+        flex-wrap: wrap; /* 小画面でTodoアイテムを折り返す */
+        padding: 15px;
+        border-left: none; /* ボーダーをなくすか調整 */
+        border-top: 8px solid var(--secondary-color); /* 上部にボーダー */
+    }
+    #todo-list li.completed {
+        border-top-color: var(--completed-text);
+    }
+
+    #todo-list li .todo-checkbox {
+        order: 0;
+        margin-right: 10px;
+    }
+    #todo-list li .todo-content {
+        order: 1;
+        flex-basis: calc(100% - 40px); /* チェックボックスと削除ボタンの幅を引く */
+    }
+    #todo-list li .delete-btn {
+        order: 2;
+        margin-left: auto; /* 右に寄せる */
+    }
+
+    #todo-list li .todo-name {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    #todo-list li .todo-tags {
+        width: 100%;
+        margin-top: 0;
+    }
+    #todo-list li .todo-notes {
+        width: 100%;
+    }
+    
+}
