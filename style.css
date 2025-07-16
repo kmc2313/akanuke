@@ -9,8 +9,8 @@
     --card-background: #FFFFFF; /* カードの背景は清潔感のある白 */
     --border-color: #F0E6F0;    /* ごく薄いラベンダー系のボーダー */
     --shadow-color: rgba(255, 182, 193, 0.25); /* primary-colorの柔らかな影 */
-    --completed-bg: #E6FFE6;    /* 完了時の背景 (薄いミントグリーンはそのまま) */
-    --completed-text: #5cb85c;  /* 完了時のテキスト色 (視認性のため維持) */
+    --completed-bg: #8cbb8c;    /* 完了時の背景 (薄いミントグリーンはそのまま) */
+    --completed-text: #f3f5f0;  /* 完了時のテキスト色 (視認性のため維持) */
     --danger-color: #FF69B4;    /* ホットピンク (削除などの警告色) */
     --warning-color: #FFD700;   /* ゴールド (注意: 視認性のため少し鮮やかさを残す) */
     --info-color: #ADD8E6;      /* ライトブルー (情報: 柔らかい水色) */
@@ -25,9 +25,9 @@
     --dark-card-background: #8C8C9A; /* アメジストグレー (背景より少し明るい、こちらも落ち着いた紫系) */
     --dark-border-color: #8C8C9A;     /* やや明るめのグレープ系で柔らかいボーダーに */
     --dark-shadow-color: rgba(0, 0, 0, 0.5); /* 影は背景に合わせて調整 */
-    --dark-completed-bg: #798285;    /* ミューテッドスチールブルー (完了時の背景 - ライトモードの緑と異なる) */
+    --dark-completed-bg: #808181;    /* ミューテッドスチールブルー (完了時の背景 - ライトモードの緑と異なる) */
     --dark-completed-text: #C0D9E5;  /* ライトブルーグレー (完了時のテキスト - ライトモードの緑と異なる) */
-    --dark-todo-color:#c8c8c0; /* ダークモードのTodoリストのテキスト色 (ライトモードのグレーより明るめ) */
+    --dark-todo-color:#a8a8a4; /* ダークモードのTodoリストのテキスト色 (ライトモードのグレーより明るめ) */
     --dark-tag-bg: #5F9EA0;          /* カデットブルー (タグ背景 - ライトモードのラベンダーと異なる) */
     --dark-tag-text: #ADD8E6;        /* ライトブルー (タグテキスト - ライトモードのパープルと異なる) */
 
@@ -215,9 +215,10 @@ h2 {
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 body.dark-mode #goal-section .goal-display {
-    background-color: var(--dark-accect-color); /* ダークモードでのアクセントカラー */
-    color: var(--dark-text-color);
+    background-color: #c0bf96; /* もっと濃い紫グレー */
+    color: #ffffff; /* 白に近い文字色 */
 }
+
 
 #goal-section .goal-display p {
     margin: 0;
@@ -561,7 +562,7 @@ textarea {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding: 5px;
     border-radius: 50%;
     transition: background-color 0.3s;
